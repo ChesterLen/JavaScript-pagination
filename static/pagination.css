@@ -10,4 +10,32 @@ body {
 .table {
     width: 100%;
     height: 100%;
+    padding: 20px 50px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td, th {
+    font-weight: bold;
+    cursor: pointer;
+    padding: 10px 10px;
+    border: 0.5px #606060 solid;
+    letter-spacing: 2px;
+}
+
+th {
+    font-size: 21px;
+    background: #454545;
+}
+
+td {
+    font-size: 19px;
+    background: #303030;
+}
+
+tr:hover td {
+    background: #30303045;
 }
