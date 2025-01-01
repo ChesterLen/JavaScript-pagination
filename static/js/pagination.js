@@ -7,14 +7,46 @@ let currentIndex = 1;
 let maxIndex = 0;
 
 
-function preLoadCalculations() {
-    array = rankList;
-    arrayLength = array.length;
-    maxIndex = arrayLength / tableSize;
+// let rankList = [];
+//
+// function fetchStudents() {
+//     fetch('api_view/')
+//         .then(res => res.json())
+//         .then(body => {
+//             let bodyDict = Object.values(body);
+//             let arrayBodyDict = Array(bodyDict);
+//
+//             arrayBodyDict.forEach(element => {
+//                 rankList = [element];
+//             })
+//         });
+// }
 
-    if ((arrayLength % tableSize) > 0) {
-        maxIndex++;
-    }
+// fetchStudents();
+
+let rankList = [];
+
+function preLoadCalculations() {
+    fetch('api_view/')
+        .then(res => res.json())
+        .then(body => {
+            let bodyDict = Object.values(body);
+            let arrayBodyDict = Array(bodyDict);
+
+            arrayBodyDict.forEach(element => {
+                rankList.append(Object.values(element));
+            })
+
+            array = rankList;
+            console.log(array);
+            arrayLength = array.length;
+            maxIndex = arrayLength / tableSize;
+            console.log(maxIndex);
+
+            if ((arrayLength % tableSize) > 0) {
+                maxIndex++;
+            }
+        });
 }
 
 function displayIndexButtons() {
@@ -47,6 +79,20 @@ function highLightIndexButton() {
 
 function displayTableRows() {
     $('.table table tbody tr').remove();
+    let tabStart = startIndex - 1;
+    let tabEnd = endIndex;
+
+    for (let i = tabStart; i < tabEnd; i++) {
+        let student = array[i];
+        let tr = '<tr>\n' +
+            '            <td>' + student['rank'] + '</td>\n' +
+            '            <td>' + student['name'] + '</td>\n' +
+            '            <td>' + student['year'] + '</td>\n' +
+            '            <td>' + student['marks'] + '</td>\n' +
+            '            <td>' + student['percentage'] + '</td>\n' +
+            '        </tr>';
+        $('.table table tbody').append(tr);
+    }
 }
 
 displayIndexButtons();
