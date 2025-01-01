@@ -1,11 +1,67 @@
+{% load static %}
+
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Document</title>
+    <title>Pagination in JavaScript</title>
+    <link rel="stylesheet" href="{% static 'pagination.css' %}" type="text/css">
 </head>
 <body>
 
+<div class="table">
+    <table>
+        <thead>
+        <tr>
+            <th>Rank</th>
+            <th>Name</th>
+            <th>Year</th>
+            <th>Total Marks</th>
+            <th>Percentage</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td>Rocky</td>
+            <td>1999</td>
+            <td>525</td>
+            <td>95%</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>John</td>
+            <td>1997</td>
+            <td>500</td>
+            <td>92%</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Wicky</td>
+            <td>1998</td>
+            <td>482</td>
+            <td>90%</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Johnson</td>
+            <td>1991</td>
+            <td>175</td>
+            <td>88%</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Ashwin</td>
+            <td>1999</td>
+            <td>505</td>
+            <td>94%</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="{% static 'js/pagination.js' %}"></script>
 </body>
 </html>
