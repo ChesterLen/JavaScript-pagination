@@ -39,3 +39,23 @@ td {
 tr:hover td {
     background: #30303045;
 }
+
+.footer {
+    margin-top: 1.5em;
+    font-size: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+button {
+    padding: 0.1em 1em;
+    color: #fff;
+    background-color: transparent;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+button.active, button:hover {
+    background: linear-gradient(to bottom, #9c9c9c 0%, #111 100%);
+}
