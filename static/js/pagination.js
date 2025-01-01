@@ -10,8 +10,8 @@ function displayIndexButtons() {
     $(".index_buttons button").remove();
     $(".index_buttons").append('<button>Previous</button>');
 
-    for(let i=1; i <=maxIndex; i++) {
-        $(".index_buttons").append('<button index="'+i+'">'+i+'</button>')
+    for (let i = 1; i <= maxIndex; i++) {
+        $(".index_buttons").append('<button index="' + i + '">' + i + '</button>')
     }
 
     $(".index_buttons").append('<button>Next</button>');
@@ -24,11 +24,11 @@ function highLightIndexButton() {
     startIndex = ((currentIndex - 1) * tableSize) + 1;
     endIndex = (startIndex + tableSize) - 1;
 
-    if(endIndex > arrayLength) {
+    if (endIndex > arrayLength) {
         endIndex = arrayLength;
     }
 
-    $('.footer span').text('Showing '+startIndex+' to '+endIndex+' of '+arrayLength+' entries');
+    $('.footer span').text('Showing ' + startIndex + ' to ' + endIndex + ' of ' + arrayLength + ' entries');
     $(".index_buttons button").removeClass('active');
-    $(".index_buttons button[index='"+currentIndex+"']").addClass('active');
+    $(".index_buttons button[index='" + currentIndex + "']").addClass('active');
 }

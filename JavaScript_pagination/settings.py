@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.admin',
 
+    'rest_framework',
+
     'JavaScript_pagination.web',
 ]
 
