@@ -6,47 +6,18 @@ let endIndex = 0;
 let currentIndex = 1;
 let maxIndex = 0;
 
-
-// let rankList = [];
-//
-// function fetchStudents() {
-//     fetch('api_view/')
-//         .then(res => res.json())
-//         .then(body => {
-//             let bodyDict = Object.values(body);
-//             let arrayBodyDict = Array(bodyDict);
-//
-//             arrayBodyDict.forEach(element => {
-//                 rankList = [element];
-//             })
-//         });
-// }
-
-// fetchStudents();
-
-let rankList = [];
+let rankList = [{"rank": 1, "name": "Product", "year": 2025, "marks": 1, "percentage": 100}];
 
 function preLoadCalculations() {
-    fetch('api_view/')
-        .then(res => res.json())
-        .then(body => {
-            let bodyDict = Object.values(body);
-            let arrayBodyDict = Array(bodyDict);
+    array = rankList;
+    console.log(array);
+    arrayLength = array.length;
+    maxIndex = arrayLength / tableSize;
+    console.log(maxIndex);
 
-            arrayBodyDict.forEach(element => {
-                rankList.append(Object.values(element));
-            })
-
-            array = rankList;
-            console.log(array);
-            arrayLength = array.length;
-            maxIndex = arrayLength / tableSize;
-            console.log(maxIndex);
-
-            if ((arrayLength % tableSize) > 0) {
-                maxIndex++;
-            }
-        });
+    if ((arrayLength % tableSize) > 0) {
+        maxIndex++;
+    }
 }
 
 function displayIndexButtons() {
