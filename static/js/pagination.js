@@ -1,4 +1,5 @@
 let rankList = [];
+
 let array = [];
 let arrayLength = 0;
 let tableSize = 10;
@@ -10,105 +11,107 @@ let maxIndex = 0;
 fetch('api_view/')
     .then(res => res.json())
     .then(body => {
-        console.log('Fetched Data:', body);
+        // Assuming the body contains a 'books' key with the data
+        let bodyValues = body.books || []; // Use the 'books' key if present
 
-        if (body.books && Array.isArray(body.books)) {
-            rankList = body.books;
-        } else {
-            console.error('Unexpected data format:', body);
-        }
-
-        console.log('Populated rankList:', rankList);
-
-        rankList.forEach((item, index) => {
-            console.log(`Item ${index}:`, item);
+        bodyValues.forEach(item => {
+            rankList.push(item);
         });
 
-        if (rankList.length > 0) {
-            displayIndexButtons();
-        } else {
-            $('.table table tbody').append('<tr><td colspan="5">No data available</td></tr>');
-        }
-    })
-    .catch(error => {
-        console.error('Error fetching data:', error);
-        $('.table table tbody').append('<tr><td colspan="5">Failed to load data</td></tr>');
+        console.log("Fetched Data:", body); // Log full body to confirm structure
+        console.log("Populated rankList:", rankList); // Log rankList
+
+        // Start with the display of index buttons after fetching the data
+        displayIndexButtons();
     });
 
 function preLoadCalculations() {
     array = rankList;
     arrayLength = array.length;
-    maxIndex = Math.ceil(arrayLength / tableSize);
+    maxIndex = Math.ceil(arrayLength / tableSize);  // Use Math.ceil to round up
+
+    // Log to check calculations
+    console.log('Array Length:', arrayLength);
+    console.log('Max Index:', maxIndex);
 }
 
 function displayIndexButtons() {
     preLoadCalculations();
 
-    $(".index_buttons button").remove();
+    // Clear the existing buttons
+    document.querySelectorAll(".index_buttons button").forEach(button => button.remove());
 
-    $(".index_buttons").append('<button>Previous</button>');
+    // Add Previous button
+    const previousButton = document.createElement("button");
+    previousButton.textContent = "Previous";
+    document.querySelector(".index_buttons").appendChild(previousButton);
 
+    // Add buttons for each index
     for (let i = 1; i <= maxIndex; i++) {
-        $(".index_buttons").append('<button index="' + i + '">' + i + '</button>');
+        const button = document.createElement("button");
+        button.textContent = i;
+        button.setAttribute("index", i);
+        button.addEventListener("click", () => {
+            currentIndex = i;
+            highLightIndexButton();
+        });
+        document.querySelector(".index_buttons").appendChild(button);
     }
 
     // Add Next button
-    $(".index_buttons").append('<button>Next</button>');
+    const nextButton = document.createElement("button");
+    nextButton.textContent = "Next";
+    document.querySelector(".index_buttons").appendChild(nextButton);
 
+    // Highlight the active index button
     highLightIndexButton();
 }
 
 function highLightIndexButton() {
     startIndex = ((currentIndex - 1) * tableSize) + 1;
-    endIndex = Math.min(startIndex + tableSize - 1, arrayLength);
+    endIndex = startIndex + tableSize - 1;
 
-    // Update footer information
-    $('.footer span').text(`Showing ${startIndex} to ${endIndex} of ${arrayLength} entries`);
+    if (endIndex > arrayLength) {
+        endIndex = arrayLength;
+    }
 
-    // Highlight the current index button
-    $(".index_buttons button").removeClass('active');
-    $(".index_buttons button[index='" + currentIndex + "']").addClass('active');
+    // Update the footer text with the current range
+    document.querySelector('.footer span').textContent = `Showing ${startIndex} to ${endIndex} of ${arrayLength} entries`;
+
+    // Highlight the active button
+    document.querySelectorAll(".index_buttons button").forEach(button => button.classList.remove('active'));
+    const activeButton = document.querySelector(`.index_buttons button[index='${currentIndex}']`);
+    if (activeButton) {
+        activeButton.classList.add('active');
+    }
 
     displayTableRows();
 }
 
 function displayTableRows() {
-    $('.table table tbody tr').remove();
+    // Clear existing table rows
+    document.querySelectorAll('.table table tbody tr').forEach(row => row.remove());
 
+    // Loop through and add rows for the current page
     let tabStart = startIndex - 1;
     let tabEnd = endIndex;
 
     for (let i = tabStart; i < tabEnd; i++) {
-        let student = array[i];
+        const student = array[i];
 
-        if (!student) {
-            console.warn(`Invalid student data at index ${i}:`, student);
-            continue;
+        // Ensure the student data is valid before displaying
+        if (student && student.rank && student.name && student.year && student.marks && student.percentage) {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+                <td>${student.rank}</td>
+                <td>${student.name}</td>
+                <td>${student.year}</td>
+                <td>${student.marks}</td>
+                <td>${student.percentage}</td>
+            `;
+            document.querySelector('.table table tbody').appendChild(tr);
+        } else {
+            console.error("Invalid student data at index", i, student);
         }
-
-        let tr = `
-            <tr>
-                <td>${student.rank || 'N/A'}</td>
-                <td>${student.name || 'N/A'}</td>
-                <td>${student.year || 'N/A'}</td>
-                <td>${student.marks || 'N/A'}</td>
-                <td>${student.percentage || 'N/A'}</td>
-            </tr>`;
-
-        $('.table table tbody').append(tr);
     }
 }
-
-$(document).on('click', '.index_buttons button', function () {
-    let indexAttr = $(this).attr('index');
-
-    if ($(this).text() === 'Previous') {
-        currentIndex = Math.max(1, currentIndex - 1);
-    } else if ($(this).text() === 'Next') {
-        currentIndex = Math.min(maxIndex, currentIndex + 1);
-    } else if (indexAttr) {
-        currentIndex = parseInt(indexAttr, 10);
-    }
-
-    highLightIndexButton();
-});
