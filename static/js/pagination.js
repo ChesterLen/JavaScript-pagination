@@ -115,3 +115,9 @@ function previous() {
         highLightIndexButton();
     }
 }
+
+
+function indexPagination(index) {
+    currentIndex = parseInt(index);
+    highLightIndexButton();
+}
