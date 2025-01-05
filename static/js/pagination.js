@@ -32,7 +32,6 @@ function preLoadCalculations() {
 
 function filterRankList() {
     let tab_filter_text = document.getElementById('tab_filter_text').value;
-    console.log(tab_filter_text);
 
     if (tab_filter_text !== '') {
         let temp_array = rankList.filter((object) => {
