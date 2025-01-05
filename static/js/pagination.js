@@ -1,3 +1,5 @@
+let styles = document.documentElement.style;
+
 let rankList = [];
 let array = [];
 let arrayLength = 0;
@@ -65,6 +67,18 @@ function sortRankList() {
         element.classList.add('sort_indication');
         element.classList.add(ascOrder ? 'asc' : 'desc');
     });
+
+    if (ascOrder) {
+        styles.setProperty('--up_arrow_color', '#ffffff');
+        styles.setProperty('--up_arrow_shadow', '0px 0px 10px #fff');
+        styles.setProperty('--down_arrow_color', '#ffffff49');
+        styles.setProperty('--down_arrow_shadow', '0px 0px 0px rgba(250, 250, 250, 0)');
+    } else {
+        styles.setProperty('--up_arrow_color', '#ffffff49');
+        styles.setProperty('--down_arrow_shadow', '0px 0px 0px rgba(250, 250, 250, 0)');
+        styles.setProperty('--down_arrow_color', '#ffffff');
+        styles.setProperty('--down_arrow_shadow', '0px 0px 10px #fff');
+    }
 }
 
 function displayIndexButtons() {
