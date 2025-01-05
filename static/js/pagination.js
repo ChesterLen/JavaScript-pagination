@@ -1,5 +1,4 @@
 let rankList = [];
-
 let array = [];
 let arrayLength = 0;
 let tableSize = 10;
@@ -116,8 +115,10 @@ function previous() {
     }
 }
 
-
-function indexPagination(index) {
-    currentIndex = parseInt(index);
-    highLightIndexButton();
-}
+// Fix: Handle table size change
+document.getElementById('table_size').addEventListener('change', function() {
+    tableSize = parseInt(this.value);
+    currentIndex = 1;  // Reset to first page
+    startIndex = 1;    // Reset to first entry
+    displayIndexButtons();
+});
