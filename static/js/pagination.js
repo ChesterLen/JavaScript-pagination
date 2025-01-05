@@ -31,7 +31,8 @@ function filterRankList() {
 
     if (tab_filter_text !== '') {
         let temp_array = rankList.filter((object) => {
-            return object.rank.toString().includes(tab_filter_text);
+            return object.rank.toString().includes(tab_filter_text)
+                || object.name.toUpperCase().includes(tab_filter_text.toUpperCase());
         });
         array = temp_array;
     } else {
