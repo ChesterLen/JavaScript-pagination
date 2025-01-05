@@ -59,3 +59,23 @@ button {
 button.active, button:hover {
     background: linear-gradient(to bottom, #9c9c9c 0%, #111 100%);
 }
+
+.tab_head_container {
+    margin-bottom: 1.5em;
+
+}
+
+.page_limit {
+    font-size: 20px;
+}
+
+.page_limit select {
+    font-size: 16px;
+    color: #fff;
+    padding: 0.1em;
+    background: linear-gradient(to bottom, #9c9c9c 0%, #111 100%);
+}
+
+.page_limit option {
+    background: rgb(58, 58, 58);
+}
