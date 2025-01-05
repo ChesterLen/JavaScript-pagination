@@ -118,3 +118,8 @@ document.getElementById('table_size').addEventListener('change', function() {
     startIndex = 1;
     displayIndexButtons();
 });
+
+document.getElementById('tab_filter_btn').addEventListener('click', () => {
+    currentIndex = 1;
+
+})

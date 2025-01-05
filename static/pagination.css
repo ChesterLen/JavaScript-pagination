@@ -64,6 +64,7 @@ button.active, button:hover {
     margin-bottom: 1.5em;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
 }
 
@@ -80,4 +81,18 @@ button.active, button:hover {
 
 .page_limit option {
     background: rgb(58, 58, 58);
+}
+
+#tab_filter_text {
+    height: 1.5em;
+    width: 15em;
+    background: transparent;
+    color: #fff;
+    border: 1px #fff solid;
+    border-radius: 5px;
+}
+
+#tab_filter_btn {
+    font-size: 17px;
+    letter-spacing: 1px;
 }
