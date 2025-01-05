@@ -17,9 +17,6 @@ fetch('api_view/')
             rankList.push(item);
         });
 
-        console.log("Fetched Data:", body);
-        console.log("Populated rankList:", rankList);
-
         displayIndexButtons();
     });
 
@@ -27,9 +24,6 @@ function preLoadCalculations() {
     array = rankList;
     arrayLength = array.length;
     maxIndex = Math.ceil(arrayLength / tableSize);
-
-    console.log('Array Length:', arrayLength);
-    console.log('Max Index:', maxIndex);
 }
 
 function displayIndexButtons() {
@@ -37,10 +31,13 @@ function displayIndexButtons() {
 
     document.querySelectorAll(".index_buttons button").forEach(button => button.remove());
 
+    // Previous Button
     const previousButton = document.createElement("button");
     previousButton.textContent = "Previous";
+    previousButton.addEventListener("click", previous);
     document.querySelector(".index_buttons").appendChild(previousButton);
 
+    // Index Buttons
     for (let i = 1; i <= maxIndex; i++) {
         const button = document.createElement("button");
         button.textContent = i;
@@ -52,8 +49,10 @@ function displayIndexButtons() {
         document.querySelector(".index_buttons").appendChild(button);
     }
 
+    // Next Button
     const nextButton = document.createElement("button");
     nextButton.textContent = "Next";
+    nextButton.addEventListener("click", next);
     document.querySelector(".index_buttons").appendChild(nextButton);
 
     highLightIndexButton();
@@ -79,7 +78,6 @@ function highLightIndexButton() {
 }
 
 function displayTableRows() {
-
     document.querySelectorAll('.table table tbody tr').forEach(row => row.remove());
 
     let tabStart = startIndex - 1;
@@ -101,5 +99,19 @@ function displayTableRows() {
         } else {
             console.error("Invalid student data at index", i, student);
         }
+    }
+}
+
+function next() {
+    if (currentIndex < maxIndex) {
+        currentIndex++;
+        highLightIndexButton();
+    }
+}
+
+function previous() {
+    if (currentIndex > 1) {
+        currentIndex--;
+        highLightIndexButton();
     }
 }
