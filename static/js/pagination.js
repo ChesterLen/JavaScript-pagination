@@ -32,7 +32,10 @@ function filterRankList() {
     if (tab_filter_text !== '') {
         let temp_array = rankList.filter((object) => {
             return object.rank.toString().includes(tab_filter_text)
-                || object.name.toUpperCase().includes(tab_filter_text.toUpperCase());
+                || object.name.toUpperCase().includes(tab_filter_text.toUpperCase())
+                || object.marks.toString().includes(tab_filter_text)
+                || object.year.toString().includes(tab_filter_text)
+                || object.percentage.toString().includes(tab_filter_text);
         });
         array = temp_array;
     } else {
