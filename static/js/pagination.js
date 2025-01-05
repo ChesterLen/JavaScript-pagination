@@ -20,9 +20,23 @@ fetch('api_view/')
     });
 
 function preLoadCalculations() {
-    array = rankList;
+    filterRankList();
     arrayLength = array.length;
     maxIndex = Math.ceil(arrayLength / tableSize);
+}
+
+function filterRankList() {
+    let tab_filter_text = document.getElementById('tab_filter_text').value;
+    console.log(tab_filter_text);
+
+    if (tab_filter_text !== '') {
+        let temp_array = rankList.filter((object) => {
+            return object.rank.toString().includes(tab_filter_text);
+        });
+        array = temp_array;
+    } else {
+        array = rankList;
+    }
 }
 
 function displayIndexButtons() {
@@ -121,5 +135,7 @@ document.getElementById('table_size').addEventListener('change', function() {
 
 document.getElementById('tab_filter_btn').addEventListener('click', () => {
     currentIndex = 1;
-
-})
+    startIndex = 1;
+    filterRankList();
+    displayIndexButtons();
+});
