@@ -30,13 +30,11 @@ function displayIndexButtons() {
 
     document.querySelectorAll(".index_buttons button").forEach(button => button.remove());
 
-    // Previous Button
     const previousButton = document.createElement("button");
     previousButton.textContent = "Previous";
     previousButton.addEventListener("click", previous);
     document.querySelector(".index_buttons").appendChild(previousButton);
 
-    // Index Buttons
     for (let i = 1; i <= maxIndex; i++) {
         const button = document.createElement("button");
         button.textContent = i;
@@ -48,7 +46,6 @@ function displayIndexButtons() {
         document.querySelector(".index_buttons").appendChild(button);
     }
 
-    // Next Button
     const nextButton = document.createElement("button");
     nextButton.textContent = "Next";
     nextButton.addEventListener("click", next);
@@ -115,10 +112,9 @@ function previous() {
     }
 }
 
-// Fix: Handle table size change
 document.getElementById('table_size').addEventListener('change', function() {
     tableSize = parseInt(this.value);
-    currentIndex = 1;  // Reset to first page
-    startIndex = 1;    // Reset to first entry
+    currentIndex = 1;
+    startIndex = 1;
     displayIndexButtons();
 });
