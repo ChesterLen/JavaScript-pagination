@@ -62,6 +62,8 @@ button.active, button:hover {
 
 .tab_head_container {
     margin-bottom: 1.5em;
+    display: flex;
+    justify-content: space-between;
 
 }
 
