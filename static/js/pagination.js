@@ -6,6 +6,9 @@ let startIndex = 1;
 let endIndex = 0;
 let currentIndex = 1;
 let maxIndex = 0;
+let sortCol = 'rank';
+let ascOrder = true;
+
 
 fetch('api_view/')
     .then(res => res.json())
@@ -21,6 +24,7 @@ fetch('api_view/')
 
 function preLoadCalculations() {
     filterRankList();
+    sortRankList();
     arrayLength = array.length;
     maxIndex = Math.ceil(arrayLength / tableSize);
 }
@@ -41,6 +45,16 @@ function filterRankList() {
     } else {
         array = rankList;
     }
+}
+
+function sortRankList() {
+    array.sort((a, b) => {
+        if (ascOrder) {
+            return (a[sortCol] > b[sortCol]) ? 1 : (a[sortCol] < b[sortCol]) ? -1 : 0;
+        } else {
+            return (a[sortCol] < b[sortCol]) ? 1 : (a[sortCol] > b[sortCol]) ? -1 : 0;
+        }
+    });
 }
 
 function displayIndexButtons() {
@@ -142,4 +156,19 @@ document.getElementById('tab_filter_btn').addEventListener('click', () => {
     startIndex = 1;
     filterRankList();
     displayIndexButtons();
+});
+
+document.querySelectorAll('.table th').forEach(th => {
+    th.addEventListener('click', function() {
+        let colName = th.getAttribute('colName');
+        if (sortCol === colName) {
+            ascOrder = !ascOrder;
+        } else {
+            sortCol = colName;
+            ascOrder = true;
+        }
+        currentIndex = 1;
+        startIndex = 1;
+        displayIndexButtons();
+    });
 });
