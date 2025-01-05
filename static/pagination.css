@@ -1,3 +1,10 @@
+:root {
+    --up_arrow_color: #fff;
+    --up_arrow_shadow: 0px 0px 10px #fff;
+    --down_arrow_color: #fffffff49;
+    --down_arrow_shadow: 0px 0px 10px rgba(250, 250, 250, 0);
+}
+
 body {
     background: #000;
     color: #fff;
@@ -95,4 +102,29 @@ button.active, button:hover {
 #tab_filter_btn {
     font-size: 17px;
     letter-spacing: 1px;
+}
+
+th {
+    position: relative;
+}
+
+th.sort_indication:after {
+    position: absolute;
+    content: '\25b2';
+    font-size: 15px;
+    cursor: pointer;
+    color: var(--up_arrow_color);
+    text-shadow: var(--up_arrow_shadow);
+    right: 5px;
+}
+
+th.sort_indication:before {
+    position: absolute;
+    content: '\25bc';
+    font-size: 15px;
+    cursor: pointer;
+    color: var(--down_arrow_color);
+    text-shadow: var(--down_arrow_shadow);
+    right: 5px;
+    margin-top: 1em;
 }

@@ -9,7 +9,6 @@ let maxIndex = 0;
 let sortCol = 'rank';
 let ascOrder = true;
 
-
 fetch('api_view/')
     .then(res => res.json())
     .then(body => {
@@ -54,6 +53,17 @@ function sortRankList() {
         } else {
             return (a[sortCol] < b[sortCol]) ? 1 : (a[sortCol] > b[sortCol]) ? -1 : 0;
         }
+    });
+
+    // Remove sort indication class from all headers
+    document.querySelectorAll('.table th').forEach(element => {
+        element.classList.remove('sort_indication', 'asc', 'desc');
+    });
+
+    // Add sort indication class to the active column
+    document.querySelectorAll(`.table th[colName='${sortCol}']`).forEach(element => {
+        element.classList.add('sort_indication');
+        element.classList.add(ascOrder ? 'asc' : 'desc');
     });
 }
 
